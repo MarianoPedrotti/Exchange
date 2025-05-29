@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+string cadena = builder.Configuration.GetConnectionString("cadenaSqlServer");
+
+builder.Services.AddDbContext<Exchange.Data.AppDbContext>(options =>
+    options.UseSqlServer(cadena));
+
+
 
 var app = builder.Build();
 
